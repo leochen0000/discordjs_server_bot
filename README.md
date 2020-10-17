@@ -1,1 +1,2 @@
-# discordjs_general_bot
+# download node.js
+# run bot with "npm start"
