@@ -15,7 +15,7 @@ client.login(process.env.SERVERSIMP_BOT_TOKEN); // Login on discord server
 // Event: any action on discord triggers an event.
 
 client.on('ready', () => {
-    console.log(`${client.user.tag} has logged in.` ); // Print message to console when bot logins to server
+    console.log(`${client.user.tag} has logged in.`); // Print message to console when bot logins to server
 });
 
 /*
@@ -39,6 +39,7 @@ client.on('message', async (message) => {
             .split(/\s+/); // regex to find string
 
         if (CMD_NAME === 'kick') {
+            console.log('kick command ran.');
             if (!(message.member.hasPermission('KICK_MEMBERS') || message.member.hasPermission('ADMINISTRATOR'))) {
                 return message.reply('You do not have permissions to use that command.');
             }
@@ -53,6 +54,7 @@ client.on('message', async (message) => {
                 .catch((err) => message.channel.send('An error occured. Check bot permissions.'));
 
         } else if (CMD_NAME === 'ban') {
+            console.log('ban command ran.');
             if (!(message.member.hasPermission('BAN_MEMBERS') || message.member.hasPermission('ADMINISTRATOR'))) {
                 return message.reply('You do not have permissions to use that command.');
             }
@@ -77,13 +79,34 @@ client.on('message', async (message) => {
 client.on('messageReactionAdd', (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
-    if (reaction.message.id == '766824977973903422') {
+    console.log('adding role');
+    if (reaction.message.id == '766866637093208085') {
         switch (name) {
-            case '🍆':
-                member.roles.add('766826463177474058');
+            case '🎮':
+                member.roles.add('751567770159939715');
                 break;
-            case '🙃':
-                member.roles.add('766826465413038103');
+            case '👺':
+                member.roles.add('697526237605920790');
+                break;
+            case '🔪':
+                member.roles.add('758190977214316595');
+                break;
+            case '✨':
+                member.roles.add('766861147822358549');
+                break;
+            case '⛏️':
+                member.roles.add('766861386726244352');
+                break;
+            case '🎬':
+                member.roles.add('766862861162643467');
+                break;
+            case '⌨️':
+                member.roles.add('766863007082348574');
+                console.log('keyboard');
+                break;
+            case '🐉':
+                member.roles.add('766869142740402206');
+                console.log('dragon');
                 break;
         }
     }
@@ -92,13 +115,32 @@ client.on('messageReactionAdd', (reaction, user) => {
 client.on('messageReactionRemove', (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
-    if (reaction.message.id == '766824977973903422') {
+    console.log('removing role');
+    if (reaction.message.id == '766866637093208085') {
         switch (name) {
-            case '🍆':
-                member.roles.remove('766826463177474058');
+            case '🎮':
+                member.roles.remove('751567770159939715');
                 break;
-            case '🙃':
-                member.roles.remove('766826465413038103');
+            case '👺':
+                member.roles.remove('697526237605920790');
+                break;
+            case '🔪':
+                member.roles.remove('758190977214316595');
+                break;
+            case '✨':
+                member.roles.remove('766861147822358549');
+                break;
+            case '⛏️':
+                member.roles.remove('766861386726244352');
+                break;
+            case '🎬':
+                member.roles.remove('766862861162643467');
+                break;
+            case '⌨️':
+                member.roles.remove('766863007082348574');
+                break;
+            case '🐉':
+                member.roles.remove('766869142740402206');
                 break;
         }
     }
