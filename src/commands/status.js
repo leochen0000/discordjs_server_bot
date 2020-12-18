@@ -3,6 +3,6 @@ module.exports = {
 	description: 'log bot status',
 	execute(message, args) {
         console.log('status command executed');
-        message.channel.send('Bot is up.');
+        message.channel.send('Server Simp is at your service.');
 	},
 };
