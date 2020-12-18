@@ -1,0 +1,41 @@
+
+//require('dotenv').config(); // import .env environment variables.
+//console.log(process.env.SERVERSIMP_BOT_TOKEN); // print environment variable to console
+//client.login(process.env.SERVERSIMP_BOT_TOKEN); // Login on discord server using env variable
+
+/*
+const client = new Client({
+    partials: ['MESSAGE', 'REACTION'] // Allow bot to get info without cache
+});
+*/
+
+/*
+client.on('message', (message) => {
+    if (message.author.bot) return; // Ignore bot messages
+    //console.log(message.content); // output any message to console
+    console.log(`[${message.author.tag}]: ${message.content}`);
+    if (message.content === 'hello') {
+        //message.reply('hello there'); This will reply to user and tag them in the current channel
+        message.channel.send('hello');
+    }
+});
+*/
+
+    /*
+    const [CMD_NAME, ...args] = message.content // ... is spreader operator will capture all arguments
+        .trim() // .trim() will get rid of whitespace before and after
+        .substring(prefix.length)
+        .split(/\s+/); // regex to find string
+    */
+
+/*
+    if (command === 'status') {
+        client.commands.get('status').execute(message, args);
+    } else if (command === 'kick') {
+        client.commands.get('kick').execute(message, args);
+    } else if (command === 'ban') {
+        client.commands.get('ban').execute(message, args);
+    } else {
+        message.channel.send('Unknown command. Current commands are =kick, =ban');
+    }
+*/
