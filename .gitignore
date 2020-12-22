@@ -1,5 +1,5 @@
 # Discord Token and config files
-*.json
+config.json
 
 # Etc Files
 random_code.txt
