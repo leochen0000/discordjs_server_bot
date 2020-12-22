@@ -3,7 +3,7 @@
 ### How to Run:
 #### 1. Create your own config.json in src/ with these lines
 {
-####    \"prefix": "=",
+####&nbsp;"prefix": "=",
 ####    \"token": "your token here"
 }
 #### 2. Download node.js
