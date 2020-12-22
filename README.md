@@ -1,6 +1,11 @@
-
+# Leo's discord bot
 
 ### How to Run:
-# download node.js
-# install discord.js with "npm install discord.js"
-# run bot with "npm start"
+#### 1. Create your own config.json in src/ with these lines
+####{
+####   "prefix": "=",
+####    "token": "your token here"
+####}
+#### 2. Download node.js
+#### 3. Install discord.js with "npm install discord.js"
+#### 4. Clone and run bot with "npm start"
