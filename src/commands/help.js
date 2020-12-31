@@ -7,7 +7,7 @@ module.exports = {
 	usage: '[command name]',
 	cooldown: 5,
 	execute(message, args) {
-        console.log('help command executed.');
+        console.log(`${this.name} command executed.`);
 		const data = [];
 		const { commands } = message.client;
 

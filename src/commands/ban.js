@@ -1,10 +1,9 @@
-
 module.exports = {
 	name: 'ban',
 	description: 'Ban member. Revok ban in Discord server settings.',
     usage: '@memberName',
 	execute(message, args) {
-        console.log('ban command executed.');
+        console.log(`${this.name} command executed.`);
         if (!(message.member.hasPermission('BAN_MEMBERS') || message.member.hasPermission('ADMINISTRATOR'))) {
             return message.reply('You do not have permissions to use that command.');
         }

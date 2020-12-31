@@ -2,7 +2,9 @@
 
 const fs = require('fs'); // Node's native file system module.
 const Discord = require('discord.js'); // Import Client class, this is a subclass of EventEmitter so it inherits all its calls too
+const Schedule = require('node-schedule');
 const { prefix, token } = require('./config.json');
+const { get } = require('https');
 const client = new Discord.Client();
 client.commands = new Discord.Collection(); // class that extend JS's native Map class and include more extensive, useful functionality. 
 
@@ -11,8 +13,6 @@ const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWi
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
-    
-    //console.log(command); // Print commands for debugging purposes
 
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
@@ -24,7 +24,20 @@ client.login(token);
 
 // Event: any action on discord triggers an event.
 client.on('ready', () => {
-    console.log(`${client.user.tag} has logged in.`); // Print message to console when bot logins to server
+    // Print message to console when bot logins to server
+    console.log(`${client.user.tag} has logged in.`);
+
+    // Custom games night announcement, hardcoded for now
+    Schedule.scheduleJob({hour: 12, dayOfWeek: 5}, function() {
+        let channelID = '736493027383705640'; // #games-night
+        let roleID = '751567770159939715'; // @fridayfam
+        console.log('Games Night announcement');
+        //const channel = client.channels.cache.find(channel => channel.name === 'test-bot'); // Get channel directly from channel name
+        const channel = client.channels.cache.get(channelID);
+        channel.send(`<@&${roleID}> PSA: GAMES NIGHT AT 9PM.`);
+        //client.users.fetch('<USER_ID>').then(user => user.send('<MESSAGE>')); // Send direct message
+    });
+    
 });
 
 client.on('message', message => {

@@ -3,7 +3,7 @@ module.exports = {
     description: 'Kick member, but they can rejoin.',
     usage: '@memberName',
 	execute(message, args) {
-        console.log('kick command executed.');
+        console.log(`${this.name} command executed.`);
         if (!(message.member.hasPermission('KICK_MEMBERS') || message.member.hasPermission('ADMINISTRATOR'))) {
             return message.reply('You do not have permissions to use that command.');
         }
@@ -14,7 +14,7 @@ module.exports = {
         const targetMember = message.guild.members.cache.get(target.id);
         targetMember
             .kick() // kick returns a "Promise" we must handle it in case of errors
-            .then((member) => message.channel.send ('User kicked.'))
-            .catch((err) => message.channel.send('An error occured. Check bot permissions.'));
+            .then((member) => message.channel.send (`User ${member} kicked.`))
+            .catch((err) => message.channel.send(`An error occured. Check bot permissions. Error message:\n ${err}`));
 	},
 };
