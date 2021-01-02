@@ -1,8 +1,5 @@
 # Discord Token and config files
 config.json
 
-# Etc Files
-random_code.txt
-
-# Incomplete files
-schedule.js
+# Incomplete files and dev testing
+misc/
