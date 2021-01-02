@@ -4,6 +4,7 @@ const fs = require('fs'); // Node's native file system module.
 const Discord = require('discord.js'); // Import Client class, this is a subclass of EventEmitter so it inherits all its calls too
 const Schedule = require('node-schedule');
 const { prefix, token } = require('./config.json');
+const { announcements } = require('./announcements.js');
 const { get } = require('https');
 const client = new Discord.Client();
 client.commands = new Discord.Collection(); // class that extend JS's native Map class and include more extensive, useful functionality. 
@@ -27,15 +28,15 @@ client.on('ready', () => {
     // Print message to console when bot logins to server
     console.log(`${client.user.tag} has logged in.`);
 
-    // Custom games night announcement, hardcoded for now
-    Schedule.scheduleJob({hour: 12, dayOfWeek: 5}, function() {
+    // Custom games night announcement
+    Schedule.scheduleJob({hour: 13, minute: 30, dayOfWeek: 5}, function() { 
         let channelID = '736493027383705640'; // #games-night
         let roleID = '751567770159939715'; // @fridayfam
         console.log('Games Night announcement');
-        //const channel = client.channels.cache.find(channel => channel.name === 'test-bot'); // Get channel directly from channel name
         const channel = client.channels.cache.get(channelID);
-        channel.send(`<@&${roleID}> PSA: GAMES NIGHT AT 9PM.`);
-        //client.users.fetch('<USER_ID>').then(user => user.send('<MESSAGE>')); // Send direct message
+        const randomAnnouncement = announcements[Math.floor(Math.random() * announcements.length)];
+        channel.send(`<@&${roleID}> ` + randomAnnouncement);
+
     });
     
 });
