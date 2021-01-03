@@ -5,13 +5,11 @@ const Discord = require('discord.js'); // Import Client class, this is a subclas
 const Schedule = require('node-schedule');
 const { prefix, token } = require('./config.json');
 const announcements = require('./announcements.js');
-const { get } = require('https');
-const client = new Discord.Client();
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] }); // enable partials to help find uncached data
 client.commands = new Discord.Collection(); // class that extend JS's native Map class and include more extensive, useful functionality. 
 
 // Retrieve commands
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
-
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
@@ -19,9 +17,6 @@ for (const file of commandFiles) {
 	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 }
-
-// Login on discord server
-client.login(token);
 
 // Event: any action on discord triggers an event.
 client.on('ready', () => {
@@ -65,7 +60,7 @@ client.on('message', message => {
 client.on('messageReactionAdd', (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
-    if (reaction.message.id == '766866637093208085') {
+    if (reaction.message.id === '766866637093208085') {
         switch (name) {
             case '🎮':
                 member.roles.add('751567770159939715');
@@ -87,11 +82,9 @@ client.on('messageReactionAdd', (reaction, user) => {
                 break;
             case '⌨️':
                 member.roles.add('766863007082348574');
-                console.log('keyboard');
                 break;
             case '🐉':
                 member.roles.add('766869142740402206');
-                console.log('dragon');
                 break;
         }
         console.log('adding role');
@@ -101,7 +94,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 client.on('messageReactionRemove', (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
-    if (reaction.message.id == '766866637093208085') {
+    if (reaction.message.id === '766866637093208085') {
         switch (name) {
             case '🎮':
                 member.roles.remove('751567770159939715');
@@ -131,3 +124,6 @@ client.on('messageReactionRemove', (reaction, user) => {
         console.log('removing role');
     }
 });
+
+// Login on discord server using secret token
+client.login(token);
