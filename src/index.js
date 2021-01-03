@@ -4,7 +4,7 @@ const fs = require('fs'); // Node's native file system module.
 const Discord = require('discord.js'); // Import Client class, this is a subclass of EventEmitter so it inherits all its calls too
 const Schedule = require('node-schedule');
 const { prefix, token } = require('./config.json');
-const { announcements } = require('./announcements.js');
+const announcements = require('./announcements.js');
 const { get } = require('https');
 const client = new Discord.Client();
 client.commands = new Discord.Collection(); // class that extend JS's native Map class and include more extensive, useful functionality. 
@@ -29,16 +29,21 @@ client.on('ready', () => {
     console.log(`${client.user.tag} has logged in.`);
 
     // Custom games night announcement
-    Schedule.scheduleJob({hour: 13, minute: 30, dayOfWeek: 5}, function() { 
-        let channelID = '736493027383705640'; // #games-night
-        let roleID = '751567770159939715'; // @fridayfam
+    Schedule.scheduleJob({hour: 12, minute: 0, dayOfWeek: 5}, function() { 
         console.log('Games Night announcement');
+        const channelID = '736493027383705640'; // #games-night
+        const roleID = '751567770159939715'; // @fridayfam
         const channel = client.channels.cache.get(channelID);
-        const randomAnnouncement = announcements[Math.floor(Math.random() * announcements.length)];
-        channel.send(`<@&${roleID}> ` + randomAnnouncement);
+
+        const randomAnnouncement = announcements.announcementList[Math.floor(Math.random() * announcements.announcementList.length)];
+        const randomGif = announcements.gifsDir + announcements.gifList[Math.floor(Math.random() * announcements.gifList.length)];
+
+        channel.send(`<@&${roleID}> ` + randomAnnouncement, {
+            files: [randomGif]
+        })
+        .catch(console.error);
 
     });
-    
 });
 
 client.on('message', message => {
@@ -126,4 +131,3 @@ client.on('messageReactionRemove', (reaction, user) => {
         console.log('removing role');
     }
 });
-
