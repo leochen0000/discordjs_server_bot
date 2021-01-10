@@ -1,8 +1,10 @@
 .vscode/
 node_modules/
+.eslintrc.json
 
 # Discord Token and config files
 config.json
 
 # Incomplete files and dev testing
 misc/
+
