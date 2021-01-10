@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'avatar',
-	description: 'Show user avatar.',
+    description: 'Show user avatar.',
+    usage: 'optional<@memberName>',
 	execute(message, args) {
         console.log(`${this.name} command executed.`);
         if (args.length != 0) {

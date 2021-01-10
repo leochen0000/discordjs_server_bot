@@ -1,20 +1,21 @@
+const messageHandler = require('../handlers/messagehandler');
+
 module.exports = {
 	name: 'kick',
-    description: 'Kick member, but they can rejoin.',
+    description: 'Kick member. They can rejoin.',
     usage: '@memberName',
 	execute(message, args) {
         console.log(`${this.name} command executed.`);
         if (!(message.member.hasPermission('KICK_MEMBERS') || message.member.hasPermission('ADMINISTRATOR'))) {
-            return message.reply('You do not have permissions to use that command.');
+            return messageHandler.noPermission(message);
         }
-        if (args.length === 0) return message.reply('Please provide an ID');
-        //const member = message.guild.members.cache.get(args[0]);  // This expects Arg[0] to be user ID
+        if (args.length === 0) return messageHandler.noID(message);
         const target = message.mentions.members.first();
-        if (!target) return message.channel.send('Please mention user to kick');
+        if (!target) return messageHandler.noMentionUser(message, 'kick');
         const targetMember = message.guild.members.cache.get(target.id);
         targetMember
             .kick() // kick returns a "Promise" we must handle it in case of errors
             .then((member) => message.channel.send (`User ${member} kicked.`))
-            .catch((err) => message.channel.send(`An error occured. Check bot permissions. Error message:\n ${err}`));
+            .catch((err) => messageHandler.handleError(message, err));
 	},
 };

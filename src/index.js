@@ -1,11 +1,11 @@
-// Tutorial: https://www.youtube.com/watch?v=BmKXBVdEV0g
+'use strict';
 
 const fs = require('fs'); // Node's native file system module.
-const Discord = require('discord.js'); // Import Client class, this is a subclass of EventEmitter so it inherits all its calls too
+const Discord = require('discord.js'); // Import the discord.js module
 const Schedule = require('node-schedule');
 const { prefix, token } = require('./config.json');
 const announcements = require('./announcements.js');
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] }); // enable partials to help find uncached data
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] }); // enable partials to help find uncached data + Create an instance of a Discord client
 client.commands = new Discord.Collection(); // class that extend JS's native Map class and include more extensive, useful functionality. 
 
 // Retrieve commands

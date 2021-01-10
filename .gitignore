@@ -1,3 +1,6 @@
+.vscode/
+node_modules/
+
 # Discord Token and config files
 config.json
 
