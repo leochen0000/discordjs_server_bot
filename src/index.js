@@ -41,6 +41,18 @@ client.on('ready', () => {
     });
 });
 
+client.on('guildMemberAdd', async member => {
+    console.log(`New member ${member.user.username} joined`);
+    member.send(`:star2: WELCOME TO SIMP CITY! :star2:\n
+    Please remember to:
+    1. Identify yourself as either an \`egirl\` (greetings m\'lady :smiling_face_with_3_hearts: ) or \`simp\` (howdy fellow king :crown: )
+    2. Mute spam channels (#bot-commands, #voice-chat-spam, #cure-for-depression, #nsfw)! 
+    3. Check out #roles if you are interested in any specific games/topics. We play online games every Friday night too! Come out and say hi!
+    If you have any questions, feel free to message any of the admins for help.`);
+
+    member.roles.add('721266023138983955');
+});
+
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return; // Ignore non-prefix and bot messages
 
@@ -87,7 +99,7 @@ client.on('messageReactionAdd', (reaction, user) => {
                 member.roles.add('766869142740402206');
                 break;
         }
-        console.log('adding role');
+        console.log(`adding role to ${member.user.username}`);
     }
 });
 
@@ -121,7 +133,7 @@ client.on('messageReactionRemove', (reaction, user) => {
                 member.roles.remove('766869142740402206');
                 break;
         }
-        console.log('removing role');
+        console.log(`removing role from ${member.user.username}`);
     }
 });
 
