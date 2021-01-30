@@ -1,13 +1,13 @@
-const { Client, Guild, Channel, GuildChannel, TextChannel, User, GuildMember, Message, } = require('discord.js');
+const { Client, Guild, Channel, GuildChannel, TextChannel, User, GuildMember, Message, Collection, } = require('discord.js');
 
 class MockDiscord {
-    constructor() {
+    constructor(userId = 'user-id', userName = 'user username', discrim = 'user#0000', avatarUrl = 'user avatar url') {
         this.mockClient();
         this.mockGuild();
         this.mockChannel();
         this.mockGuildChannel();
         this.mockTextChannel();
-        this.mockUser();
+        this.mockUser(userId, userName, discrim, avatarUrl);
         this.mockGuildMember();
         this.guild.addMember(this.user, { accessToken: 'mockAccessToken' });
         this.mockMessage();
@@ -78,12 +78,12 @@ class MockDiscord {
     mockTextChannel() {
         this.textChannel = new TextChannel(this.guild, Object.assign(Object.assign({}, this.guildChannel), { topic: 'topic', nsfw: false, last_message_id: '123456789', lastPinTimestamp: new Date('2019-01-01').getTime(), rate_limit_per_user: 0 }));
     }
-    mockUser() {
+    mockUser(userId, userName, discrim, avatarUrl) {
         this.user = new User(this.client, {
-            id: 'user-id',
-            username: 'user username',
-            discriminator: 'user#0000',
-            avatar: 'user avatar url',
+            id: userId,
+            username: userName,
+            discriminator: discrim,
+            avatar: avatarUrl,
             bot: false,
         });
     }
@@ -105,7 +105,7 @@ class MockDiscord {
         this.message = new Message(this.client, {
             id: 'message-id',
             type: 'DEFAULT',
-            content: '=avatar',
+            content: 'hello',
             author: this.user,
             webhook_id: null,
             member: this.guildMember,
@@ -117,6 +117,9 @@ class MockDiscord {
             edited_timestamp: null,
             reactions: [],
             mentions: [],
+            //mentions: {
+            //    users: new Collection([['user', this.user]]),
+            //},
             mention_roles: [],
             mention_everyone: [],
             hit: false,
