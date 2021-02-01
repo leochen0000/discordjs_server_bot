@@ -20,7 +20,7 @@ module.exports = {
         });
 
         if (userList.length == 0) {
-            return message.reply('No users in channel.');
+            return message.reply('No users in `Games n Friends` channel.');
         }
         // Scramble users
         shuffleUserList = (array) => {
