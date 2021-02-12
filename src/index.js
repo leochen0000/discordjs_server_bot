@@ -24,7 +24,7 @@ client.on('ready', () => {
     console.log(`${client.user.tag} has logged in.`);
 
     // Custom games night announcement
-    Schedule.scheduleJob({hour: 12, minute: 0, dayOfWeek: 5}, function() { 
+    Schedule.scheduleJob({hour: 13, minute: 0, dayOfWeek: 5}, function() { 
         console.log('Games Night announcement');
         const channelID = '736493027383705640'; // #games-night
         const roleID = '751567770159939715'; // @fridayfam
