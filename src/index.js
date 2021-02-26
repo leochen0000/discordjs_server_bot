@@ -4,7 +4,7 @@ const fs = require('fs'); // Node's native file system module.
 const Discord = require('discord.js'); // Import the discord.js module
 const Schedule = require('node-schedule');
 const { prefix, token } = require('./config.json');
-const announcements = require('./announcements.js');
+const { announcementList, gifList, gifsDir } = require('./announcements.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] }); // enable partials to help find uncached data + Create an instance of a Discord client
 client.commands = new Discord.Collection(); // class that extend JS's native Map class and include more extensive, useful functionality. 
 
@@ -23,15 +23,21 @@ client.on('ready', () => {
     // Print message to console when bot logins to server
     console.log(`${client.user.tag} has logged in.`);
 
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
     // Custom games night announcement
-    Schedule.scheduleJob({hour: 13, minute: 0, dayOfWeek: 5}, function() { 
+    Schedule.scheduleJob({hour: 12, minute: 30, dayOfWeek: 5}, function() { 
         console.log('Games Night announcement');
         const channelID = '736493027383705640'; // #games-night
         const roleID = '751567770159939715'; // @fridayfam
         const channel = client.channels.cache.get(channelID);
 
-        const randomAnnouncement = announcements.announcementList[Math.floor(Math.random() * announcements.announcementList.length)];
-        const randomGif = announcements.gifsDir + announcements.gifList[Math.floor(Math.random() * announcements.gifList.length)];
+        const randomAnnouncement = announcementList[getRandomInt(0, announcementList.length)];
+        const randomGif = gifsDir + gifList[getRandomInt(0, gifList.length)];
 
         channel.send(`<@&${roleID}> ` + randomAnnouncement, {
             files: [randomGif]
@@ -39,6 +45,7 @@ client.on('ready', () => {
         .catch(console.error);
 
     });
+
 });
 
 client.on('guildMemberAdd', async member => {
