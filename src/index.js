@@ -104,6 +104,9 @@ client.on('messageReactionAdd', (reaction, user) => {
             case '🐉':
                 member.roles.add('766869142740402206');
                 break;
+            case ':anger:':
+                member.roles.add('818702008332320778');
+                break;
         }
         console.log(`adding role to ${member.user.username}`);
     }
@@ -137,6 +140,9 @@ client.on('messageReactionRemove', (reaction, user) => {
                 break;
             case '🐉':
                 member.roles.remove('766869142740402206');
+                break;
+            case ':anger:':
+                member.roles.remove('818702008332320778');
                 break;
         }
         console.log(`removing role from ${member.user.username}`);
