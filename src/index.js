@@ -75,6 +75,8 @@ client.on('message', message => {
 
 });
 
+
+// Note: To get the unicode emoji like the ones below, type \:emojiName: in a discord channel and copy and paste that
 client.on('messageReactionAdd', (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
@@ -104,7 +106,7 @@ client.on('messageReactionAdd', (reaction, user) => {
             case '🐉':
                 member.roles.add('766869142740402206');
                 break;
-            case ':anger:':
+            case '💢':
                 member.roles.add('818702008332320778');
                 break;
         }
@@ -141,7 +143,7 @@ client.on('messageReactionRemove', (reaction, user) => {
             case '🐉':
                 member.roles.remove('766869142740402206');
                 break;
-            case ':anger:':
+            case '💢':
                 member.roles.remove('818702008332320778');
                 break;
         }
