@@ -39,10 +39,13 @@ client.on('ready', () => {
         const randomAnnouncement = announcementList[getRandomInt(0, announcementList.length)];
         const randomGif = gifsDir + gifList[getRandomInt(0, gifList.length)];
 
-        channel.send(`<@&${roleID}> ` + randomAnnouncement, {
-            files: [randomGif]
-        })
-        .catch(console.error);
+        (async () => {
+        let m = await channel.send(`<@&${roleID}> ` + randomAnnouncement, {files: [randomGif]})
+        await m.react('<:blobHeart:736048539322417263>');
+        await m.react('<:YEET:723303779209969744>');
+        await m.react('<:ping:727421147569848330>');
+        await m.react('<:sovietflag:794786138362740776>');
+        })();
 
     });
 
